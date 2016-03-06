@@ -1,0 +1,55 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# About
+
+Making maps with R has been quite easy due to various [packages](https://cran.r-project.org/web/views/Spatial.html). For example, the `maps` package has a function that directly plots US counties:
+
+```{r maps-county, warning=FALSE, message=FALSE}
+library(maps)
+map("county")
+```
+
+Or use the above data but plot it with `ggplot2`:
+
+```{r ggplot-county, warning=FALSE, message=FALSE}
+library(ggplot2)
+map_data("county") -> map_data_county
+ggplot() +
+  geom_map(data = map_data_county, map = map_data_county,
+           aes(x = long, y = lat, map_id = region),
+           color="black", fill="white", size=0.1)
+```
+
+Or with `ggcounty`:
+
+```{r ggcouty, warning=FALSE, message=FALSE}
+library(ggcounty)
+ggcounty.us() -> us
+us$gg
+```
+
+The problem with these maps, however, is that Alaska and Hawaii are often missing. Moving these two states into a US map involves rotating, shrinking, and shifting the corresponding spatial polygons.
+
+The `usmapdata` package intends to solve this problem by providing tidy data frames that have Alaska and Hawaii in proper place, following the procedure documented nicely in [a blog post by Bob Rudis](rud.is/b/2014/11/16/moving-the-earth-well-alaska-hawaii-with-r/).
+
+# Installation
+
+```R
+# install.packages("devtools")
+devtools::install_github("jjchern/usmapdata")
+```
+

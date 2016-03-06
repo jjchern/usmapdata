@@ -1,0 +1,12 @@
+Package: usmapdata
+Title: US Map Data from Census
+Version: 0.0.0.9000
+Authors@R: 'JJ Chen <jiajia.chern@gmail.com> [aut, cre]'
+Description: Data frames for plotting thematic maps with ggplot2.
+Depends:
+    R (>= 3.2.2)
+License: CC0
+LazyData: true
+URL: https://github.com/jjchern/usmapdata
+BugReports: https://github.com/jjchern/usmapdata/issues
+RoxygenNote: 5.0.0.9000
