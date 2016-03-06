@@ -47,3 +47,23 @@ Installation
 # install.packages("devtools")
 devtools::install_github("jjchern/usmapdata")
 ```
+
+Usage
+=====
+
+Plain County Map
+----------------
+
+Aftering installing the package, one can get, say, the US county data with `usmapdata::county`. For example, the following chuck of code plots a county map with `ggplot2`:
+
+``` r
+library(ggplot2)
+ggplot() +
+  geom_map(data = usmapdata::county, map = usmapdata::county,
+           aes(x = long, y = lat, map_id = id),
+           color="black", fill="white", size=0.1) +
+  coord_map("albers", lat0 = 30, lat1 = 40) +
+  ggthemes::theme_map()
+```
+
+![](README-usmapdata-county-1.png)
