@@ -19,6 +19,7 @@ albers_proj = "+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370
 # Hawaii ------------------------------------------------------------------
 
 hawaii = county[county@data$STATE == "15", ]
+hawaii$fips = stringr::str_c(hawaii$STATE, hawaii$COUNTY)
 hawaii %>%
         sp::spTransform(sp::CRS(albers_proj)) %>%
         maptools::elide(rotate = -35) %>%
@@ -27,13 +28,14 @@ hawaii %>%
 sp::proj4string(hawaii) = albers_proj
 hawaii %>%
         sp::spTransform(sp::CRS(original_proj)) %>%
-        broom::tidy(region = "GEO_ID") %>%
+        broom::tidy(region = "fips") %>%
         tbl_df() ->
         hawaii
 
 # Alaska ------------------------------------------------------------------
 
 alaska = county[county@data$STATE == "02", ]
+alaska$fips = stringr::str_c(alaska$STATE, alaska$COUNTY)
 alaska %>%
         sp::spTransform(sp::CRS(albers_proj)) %>%
         maptools::elide(rotate = -50) %>%
@@ -43,16 +45,19 @@ alaska %>%
 sp::proj4string(alaska) = albers_proj
 alaska %>%
         sp::spTransform(sp::CRS(original_proj)) %>%
-        broom::tidy(region = "GEO_ID") %>%
+        broom::tidy(region = "fips") %>%
         tbl_df() ->
         alaska
 
 # Full county data --------------------------------------------------------
 
-county[!(county@data$STATE %in% c("02", "15", "72")), ] %>%
-        broom::tidy(region = "GEO_ID") %>%
+county = county[!(county@data$STATE %in% c("02", "15", "72")), ]
+county$fips = stringr::str_c(county$STATE, county$COUNTY)
+county %>%
+        broom::tidy(region = "fips") %>%
         bind_rows(hawaii) %>%
-        bind_rows(alaska) ->
+        bind_rows(alaska) %>%
+        tbl_df() ->
         county
 
 # Save --------------------------------------------------------------------
