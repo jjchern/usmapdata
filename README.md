@@ -67,3 +67,18 @@ ggplot() +
 ```
 
 ![](README-usmapdata-county-1.png)
+
+Plain state Map
+---------------
+
+``` r
+library(ggplot2)
+ggplot() +
+  geom_map(data = usmapdata::state, map = usmapdata::state,
+           aes(x = long, y = lat, map_id = id),
+           color="black", fill="white", size=0.1) +
+  coord_map("albers", lat0 = 30, lat1 = 40) +
+  ggthemes::theme_map()
+```
+
+![](README-usmapdata-state-1.png)
