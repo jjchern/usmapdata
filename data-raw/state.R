@@ -66,5 +66,5 @@ devtools::use_data(state, overwrite = TRUE)
 
 # Delete source files but keep the zip files ------------------------------
 
-system("rm `find data-raw -name 'gz_2010_us_040_00_20m.*' -a ! -name '*.zip'`")
+# system("rm `find data-raw -name 'gz_2010_us_040_00_20m.*' -a ! -name '*.zip'`")
 unlink(fil)
