@@ -1,7 +1,5 @@
 ---
-output:
-  md_document:
-    variant: markdown_github
+output: github_document
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -10,13 +8,14 @@ output:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "README-",
+  cache = TRUE
 )
 ```
 
-[![Travis-CI Build Status](https://travis-ci.org/jjchern/usmapdata.svg?branch=master)](https://travis-ci.org/jjchern/usmapdata)
-
 # About
+
+[![Travis-CI Build Status](https://travis-ci.org/jjchern/usmapdata.svg?branch=master)](https://travis-ci.org/jjchern/usmapdata)
 
 Making maps with R has been quite easy due to various [packages](https://cran.r-project.org/web/views/Spatial.html). For example, the `maps` package has a function that directly plots US counties:
 
@@ -39,6 +38,7 @@ ggplot() +
 Or with `ggcounty`:
 
 ```{r ggcouty, warning=FALSE, message=FALSE}
+# devtools::install_github("hrbrmstr/ggcounty")
 library(ggcounty)
 ggcounty.us() -> us
 us$gg
